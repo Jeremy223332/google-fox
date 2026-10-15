@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Fox</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="fox-icon">🦊</div>
+      <div>
+        <div class="brand-name">Google Fox</div>
+        <div class="brand-subtitle">Your web, your way.</div>
+      </div>
+    </div>
 
+    <div class="toolbar">
+      <button id="back" title="Back">←</button>
+      <button id="forward" title="Forward">→</button>
+      <button id="reload" title="Reload">↻</button>
+      <button id="home" title="Home">⌂</button>
+
+      <form id="address-form">
+        <span>🔎</span>
+        <input id="address" placeholder="Search Google or enter a website address">
+        <button class="go-button" type="submit">Go</button>
+      </form>
+
+      <button id="new-tab" title="New tab">＋</button>
+    </div>
+  </header>
+
+  <nav id="tabs" class="tabs"></nav>
+
+  <main id="browser" class="browser">
+    <section id="welcome" class="welcome">
+      <div class="welcome-fox">🦊</div>
+      <h1>Welcome to <span>Google Fox</span></h1>
+      <p>Your next adventure starts here.</p>
+
+      <form id="search-form" class="search-box">
+        <input id="home-search" placeholder="What are you looking for?">
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="quick-links">
+        <button data-url="https://www.google.com">Google</button>
+        <button data-url="https://www.youtube.com">YouTube</button>
+        <button data-url="https://www.wikipedia.org">Wikipedia</button>
+      </div>
+
+      <p class="hint">
+        Tip: Enter a website address above, or search for anything.
+      </p>
+    </section>
+  </main>
+
+  <footer class="statusbar">
+    <span><span class="status-dot"></span> Google Fox is ready</span>
+    <span>FOX ENGINE · DESKTOP</span>
+  </footer>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
