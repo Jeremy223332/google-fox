@@ -1,1 +1,12 @@
-
+{
+  "name": "google-fox",
+  "version": "1.0.0",
+  "description": "Google Fox desktop web browser",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^38.2.0"
+  }
+}
