@@ -1,1 +1,170 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Fox Media Player</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #090a0e;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 22px;
+      background: #15161d;
+      border-bottom: 1px solid #303340;
+    }
+
+    header span { font-size: 25px; }
+
+    header strong { color: #ff8b35; }
+
+    main {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    #player {
+      width: min(1100px, 100%);
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border: 1px solid #303340;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    video, audio, iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    audio {
+      display: block;
+      height: 70px;
+      margin-top: 35%;
+    }
+
+    video {
+      object-fit: contain;
+    }
+
+    iframe { border: 0; }
+
+    #message {
+      color: #aaa;
+      text-align: center;
+      margin-top: 18px;
+      max-width: 700px;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span>🦊</span>
+    <strong>Google Fox</strong>
+    <span>Media Player</span>
+  </header>
+
+  <main>
+    <div id="player"></div>
+    <p id="message">Loading media...</p>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const rawUrl = params.get("url");
+    const player = document.getElementById("player");
+    const message = document.getElementById("message");
+
+    function getYouTubeId(url) {
+      try {
+        const parsed = new URL(url);
+
+        if (parsed.hostname === "youtu.be") {
+          return parsed.pathname.slice(1);
+        }
+
+        if (
+          parsed.hostname === "youtube.com" ||
+          parsed.hostname.endsWith(".youtube.com")
+        ) {
+          if (parsed.pathname === "/watch") {
+            return parsed.searchParams.get("v");
+          }
+
+          const match = parsed.pathname.match(
+            /^\/(?:embed|shorts)\/([^/]+)/
+          );
+
+          return match ? match[1] : null;
+        }
+      } catch {}
+
+      return null;
+    }
+
+    if (!rawUrl) {
+      message.textContent = "No media URL was provided.";
+    } else {
+      try {
+        const url = new URL(rawUrl);
+
+        if (!["http:", "https:"].includes(url.protocol)) {
+          throw new Error("Unsupported URL protocol");
+        }
+
+        const youtubeId = getYouTubeId(url.href);
+
+        if (youtubeId) {
+          const iframe = document.createElement("iframe");
+          iframe.src =
+            "https://www.youtube-nocookie.com/embed/" +
+            encodeURIComponent(youtubeId) +
+            "?autoplay=1";
+
+          iframe.allow =
+            "autoplay; encrypted-media; picture-in-picture; fullscreen";
+
+          iframe.allowFullscreen = true;
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          player.appendChild(iframe);
+
+          message.textContent = "Playing YouTube video";
+        } else {
+          const media = document.createElement("video");
+          media.src = url.href;
+          media.controls = true;
+          media.autoplay = true;
+          media.playsInline = true;
+          media.preload = "metadata";
+
+          media.addEventListener("error", () => {
+            message.textContent =
+              "This media could not be played. The URL may not be a " +
+              "direct audio/video file, or the server may block playback.";
+          });
+
+          player.appendChild(media);
+          message.textContent = "Google Fox Media Player";
+        }
+      } catch {
+        message.textContent = "That media URL is invalid.";
+      }
+    }
+  </script>
+</body>
+</html>
