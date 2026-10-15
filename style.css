@@ -1,1 +1,279 @@
 
+:root {
+  color-scheme: dark;
+  --bg: #101116;
+  --panel: #191b23;
+  --panel2: #222530;
+  --border: #303340;
+  --orange: #ff8b35;
+  --text: #f5f5f7;
+  --muted: #a0a4b4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, sans-serif;
+}
+
+.topbar {
+  padding: 15px 20px 12px;
+  background: #14151c;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.fox-icon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 14px;
+  background: #332317;
+  font-size: 27px;
+}
+
+.brand-name {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.brand-subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button {
+  color: var(--text);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  border-radius: 9px;
+  padding: 10px 14px;
+  font-size: 15px;
+}
+
+button:hover {
+  border-color: var(--orange);
+  background: #30251f;
+}
+
+#address-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 7px 3px 14px;
+  background: #0d0e13;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 0;
+}
+
+#address {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  color: white;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+}
+
+.go-button, .search-box button {
+  color: #21140b;
+  background: var(--orange);
+  border: none;
+  font-weight: 800;
+}
+
+.go-button:hover, .search-box button:hover {
+  background: #ffad70;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  padding: 9px 14px 0;
+  background: #14151c;
+  overflow-x: auto;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 130px;
+  max-width: 220px;
+  padding: 10px 12px;
+  border-radius: 10px 10px 0 0;
+  background: #1b1d25;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.tab.active {
+  color: white;
+  background: var(--bg);
+  border-top: 2px solid var(--orange);
+}
+
+.tab-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.close-tab {
+  border: 0;
+  padding: 2px 5px;
+  background: transparent;
+}
+
+.browser {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.welcome {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 50% 35%, #342316 0%, transparent 50%),
+    var(--bg);
+}
+
+.welcome-fox {
+  font-size: 74px;
+  filter: drop-shadow(0 0 22px #ff8b3544);
+}
+
+.welcome h1 {
+  margin: 18px 0 8px;
+  font-size: clamp(24px, 4vw, 40px);
+  text-align: center;
+}
+
+.welcome h1 span {
+  color: var(--orange);
+}
+
+.welcome p {
+  color: var(--muted);
+}
+
+.search-box {
+  display: flex;
+  gap: 8px;
+  width: min(620px, 100%);
+  margin-top: 24px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  background: #181a22;
+  border-radius: 14px;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  padding: 12px;
+  background: transparent;
+  color: white;
+  font-size: 15px;
+}
+
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hint {
+  margin-top: 35px;
+  font-size: 12px;
+}
+
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 16px;
+  background: #14151c;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #66d69b;
+}
+
+webview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+
+@media (max-width: 700px) {
+  .topbar {
+    padding: 10px;
+  }
+
+  .toolbar {
+    gap: 4px;
+  }
+
+  .toolbar > button {
+    padding: 9px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .statusbar {
+    font-size: 9px;
+  }
+}
